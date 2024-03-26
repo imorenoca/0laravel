@@ -1,4 +1,4 @@
-#Curso de Laravel Profesional de GOGODEV
+# Curso de Laravel Profesional de GOGODEV
 
 # Laravel 2 - Vistas y plantillas
 
@@ -18,6 +18,16 @@ Route::view('/', 'index')->name('index');
 Route::view('/about', 'about')->name('about');
 ``` 
 
+
+**levantar sevidor de pruebas**
+php artisan serve
+Nota: desde nuestra carpeta de proyecto.
+
+**Consejos**  
+Si repetimos mucho código, es señal de que algo no estamos haciendo bien.  
+Aquí entra el concepto de **layout**  
+Blade ofrece recursos 
+
 **resources>view**
 En este directorio están las **Vistas** de nuestra aplicación. 
 Nomenclatura index.blade.php // about.blade.php 
@@ -32,11 +42,17 @@ Añadimos el directorio **layouts**: partes comunes a nuestras vistas.
     </title>
 ```
 
-**levantar sevidor de pruebas**
-php artisan serve
-Nota: desde nuestra carpeta de proyecto.
+Para llamar a la plantilla general dentro de la vista que queremos invocarla tenemos que usar **@extends('direccion.nombre')**   
+Tener en cuenta que los directorios se llaman con puntos, en nuestro caso:
+``` php
+@extends('layouts.landing')
 
-**Consejos**  
-Si repetimos mucho código, es señal de que algo no estamos haciendo bien.  
-Aquí entra el concepto de **layout**  
-Blade ofrece recursos  
+@section('title','Home')
+
+@section('content')
+    <h1>Index</h1>
+    <p>Ubicamos todo el contenido</p>
+@endsection
+
+```  
+
