@@ -1,66 +1,111 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Curso de Laravel Profesional de GOGODEV
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+# Laravel 2 - Vistas y plantillas
 
-## About Laravel
+Crear un nuevo proyecto de laravel  
+``` php
+laravel new blade 
+```
+**routes>web.php**  
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Enrutamiento de nuestra aplicación.  
+Clase Route usamos el método estático view (:: en php).  
+Asociamos el directorio '/' a la vista, y le asignamos un nombre. 
+Landing estática.  
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+```php
+Route::view('/', 'index')->name('index');
+Route::view('/about', 'about')->name('about');
+``` 
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
-## Learning Laravel
+**levantar sevidor de pruebas**
+php artisan serve
+Nota: desde nuestra carpeta de proyecto.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+**Consejos**  
+Si repetimos mucho código, es señal de que algo no estamos haciendo bien.  
+Aquí entra el concepto de **layout**  
+Blade ofrece recursos 
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+**resources>view**
+En este directorio están las **Vistas** de nuestra aplicación. 
+Nomenclatura index.blade.php // about.blade.php 
+Dentro de Laravel las vistas tienen la extensión blade
+Añadimos el directorio **layouts**: partes comunes a nuestras vistas.  
+    - Si sólo tenemos uno **base.blade.php** o **app.blade.php**  
+    - **landing.blade.php**: aquí realizamos nuestra parte común, esta estructura la vamos a extender a través del resto de vistas. Definir huecos para que sean implementados por las vistas.
+    - **@yield('title')**: Definir una sección en la plantilla, para inyectar contenido. La arroba es una directiva.  
+``` html
+    <title>
+        @yield('title')
+    </title>
+```
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Para llamar a la plantilla general dentro de la vista que queremos invocarla tenemos que usar **@extends('direccion.nombre')**   
+Tener en cuenta que los directorios se llaman con puntos, en nuestro caso:
+``` php
+@extends('layouts.landing')
 
-## Laravel Sponsors
+@section('title','Home')
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+@section('content')
+    <h1>Index</h1>
+    <p>Ubicamos todo el contenido</p>
+@endsection
 
-### Premium Partners
+``` 
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+**Creación de un menú de navegación**  
+Incluimos <nav></nav> en el landing.blade.php, nuestra plantilla general para las vistas.  
+Truco
+```
+ ul>li*4>a
 
-## Contributing
+```
+Una buena práctica es incluir las partes de nuestra aplicación, dentro de una carpeta llamada *_partials*  
+resources>views>layouts>_partials>menu.blade.php  
+El layout va a tener un componente hijo ** @include **  
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Error encontrado en el menú de navegación con el index, si no existe el general en el menú de navegación hay que incluir la dirección dónde está ubicado:  
+``` php
+Route::view('/index', 'index')->name('index');
+```
 
-## Code of Conduct
+Navegación - rutas  
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+**{{}} código ** Código scoopado  
+``` html
+            <li><a href="{{route('index')}}">Index</a></li>
+```
+La modificación del nombre de la ruta se realiza en el enrutador web.php
+```php
+Route::view('/contacta-con-nosotros', 'contact')->name('contact');
+```
 
-## Security Vulnerabilities
+Componente hijo -- compenentes blade, igual que includes se puede definir secciones, manipulables.  
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Se guardan en la carpeta resources>views>_components>card.blade.php
 
-## License
+``` php
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+<div>
+    <h3>{{ $title }}</h3>
+    <p>{{ $content }}</p>
+</div> 
+
+```
+** _components **  
+Los componentes se definen con los slogs y asignando {{}} nombre de variable php
+
+``` php
+    @component('_components.card')
+        @slot('title', 'Service 1')
+        @slot('content','lorem ipsum dolor set aimet.')
+
+    @endcomponent
+```
+
+
+
+
