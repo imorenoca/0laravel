@@ -88,6 +88,9 @@ modificar datos que he migrado.
 
     -   php artisan make:migration update_notes_table
 
-        #Paso 2
+#Paso 2
 
-    Trabajar con el modelo.
+Trabajar con el modelo. La tabla note- generar el modelo
+**php artisan make:model Note**  
+Modelo **Note** en singular y mayúscula
+Si no se respeta la convención de nombres **protected $table = 'tasks';**
