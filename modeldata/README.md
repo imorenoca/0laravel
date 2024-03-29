@@ -94,3 +94,19 @@ Trabajar con el modelo. La tabla note- generar el modelo
 **php artisan make:model Note**  
 Modelo **Note** en singular y mayúscula
 Si no se respeta la convención de nombres **protected $table = 'tasks';**
+
+Explicación
+´´´
+class Note extends Model
+{
+use HasFactory;
+protected $fillable = ['title',etc...] los campos que se pueden rellenar
+protected $guarded= los que no se pueden rellenar
+protected $casts = forzar datos
+protected $hidden = evitar que se entreguen datos cuando entreguemos una serialización 'password'
+
+}
+´´´
+
+Crear un nuevo modelo y migración
+php artisan make:model Author --migration
