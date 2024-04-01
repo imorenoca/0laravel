@@ -72,7 +72,8 @@ Valores de las tablas
 Una vez creada la tabla: php artisan migrate  
 eliminar las migraciones
 
-```php artisan migrate:reset
+```php
+artisan migrate:reset
 
 ```
 
