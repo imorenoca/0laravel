@@ -8,7 +8,7 @@
 
         <ul>
             @forelse($users as $user)
-                <li>{{$user->name}}</li>
+                <li>{{$user->name}}--{{$user->age}} years old</li>
             @empty
             <li>List is empty</li>
             @endforelse
