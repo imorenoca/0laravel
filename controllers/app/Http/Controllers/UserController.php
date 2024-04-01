@@ -4,16 +4,20 @@ namespace App\Http\Controllers;
 use Iluminate\Http\Request;
 use App\Models\User;
 use  Illuminate\Support\Facades\Hash;
+use DB;
 
 class UserController extends Controller
 {
     public function index()
     {
-        $users = User::all();
+        
+        $users = DB::select('SELECT * FROM users WHERE age > ?', [30]);
+        return view('user.index', compact('users'));          
+        /*$users = User::all();
         return $users;
-        /*$users = User::where('age', '>=',18)->orderBy ('age','desc')->get();
+        $users = User::where('age', '>=',40)->orderBy ('age','desc')->get();
         return view('user.index', compact('users'));
-        /*[
+        [
             "users"=> $users
         ]);*/
     }
