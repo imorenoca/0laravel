@@ -49,4 +49,14 @@ Desventajas:
 
 8. Realizar consultas directamente.
 
-DB: clase que realiza las consultas.
+DB: clase que realiza las consultas SQL PURAS.
+- Se controla la eficiencia de la consulta y se sabe que utiliza
+- bajo acoplamiento.
+También se puede usar esta clase para insertar los datos.  
+
+DB::insert(DB::raw('INSERT INTO users VALUE...'))
+
+Desventajas  
+No somos agnósiticos al sistema de persistencia, tenemos que revisarlas.
+
+Abandonamos la programación orientada a objetos.
