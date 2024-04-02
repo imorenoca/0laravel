@@ -1,12 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>El valor de la ruta es {{ $id }}</h1>
-    
-</body>
-</html>
+@extends('layouts.app')
+
+@section('content')
+<br>
+<a href="{{route('note.create')}}">Create new note</a>
+<ul>
+    @forelse($notes as $note) 
+    <li><a href="{{route('note.show', $note->id)}}">{{$note->title}}</a> | <a href="{{route('note.edit', $note->id) }}">EDIT</a> | <a href="#">DELETE</a></li> 
+    @empty
+    <p>No data.</p>
+    @endforelse
+</ul>
+@endsection

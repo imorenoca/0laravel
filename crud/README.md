@@ -26,6 +26,7 @@ public function index($id)
         <h1>El valor de la ruta es {{ $id }}</h1>
 15. En las rutas debemos incluir siempre primero los casos más específicos, y los más generales, más abajo.
 Ejecutar rutas que no provoquen colisiones.
+16. Seguridad en Laravel: en la insercción del formulario, después de label @csrf - está aplicado por defecto, si no se pone da error.
 
 
 
