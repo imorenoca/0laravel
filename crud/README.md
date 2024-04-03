@@ -1,4 +1,4 @@
-# Parámetros dinámicos y CRUD.
+# Parámetros dinámicos y CRUD
 
 1. Crear nuevo proyecto.
     **laravel new crud**
@@ -6,7 +6,7 @@
  crud>.env
 3. Route::get('product/{id?}', [Controller::class, 'function'])->name('example');
 4. php artisan make:controller NoteController
-5. php artisan make:model Note --migration 
+5. php artisan make:model Note --migration
 6. Crear base de datos en Servidor de Mysql. crud
 7. Configurar .env -> en mi caso cambiar el puerto.
 8. Modificar las crud>database>migrations>create_notes_table.php para que tenga los campos
@@ -14,7 +14,7 @@
    protected $fillable = ['title','description'];
 10. Migrar el contenido: php artisan migrate
 11. En crud>app>Http>Controllers>NoteController.php crear la función index()
-     public function index($id) { 
+     public function index($id) {
          return view('note.index',['id'=>$id]); }
 12. crud>routes>web.php - agregar ruta
 use App\Http\Controllers\NoteController;
@@ -23,11 +23,11 @@ Route::get('/note/{id}', [NoteController::class, 'index']) > name('note.index');
 public function index($id)
 14. Creamos la vista.
     crud>resources>views>note>index.php
-        <h1>El valor de la ruta es {{ $id }}</h1>
+
+       ``` html
+       <h1> El valor de la ruta es {{ $id }} </h1>
+       ```
+
 15. En las rutas debemos incluir siempre primero los casos más específicos, y los más generales, más abajo.
 Ejecutar rutas que no provoquen colisiones.
 16. Seguridad en Laravel: en la insercción del formulario, después de label @csrf - está aplicado por defecto, si no se pone da error.
-
-
-
-
